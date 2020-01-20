@@ -7,7 +7,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";*/
-        String logo = "  __  .__             /\\            .___     __           \n" +
+        /*String logo = "  __  .__             /\\            .___     __           \n" +
                 "_/  |_|__| ____    ___)/ ______   __| _/_ __|  | __ ____  \n" +
                 "\\   __\\  |/    \\  / ___\\/  ___/  / __ |  |  \\  |/ // __ \\ \n" +
                 " |  | |  |   |  \\/ /_/  >___ \\  / /_/ |  |  /    <\\  ___/ \n" +
@@ -27,5 +27,10 @@ public class Duke {
         }
         System.out.println("BYE BYE SEE YOU BACK SOON!");
         input.close();
+        */
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
+        System.out.println("____________________________________________________________________");
+        System.out.println("Bye. Hope to see you soon!");
     }
 }
