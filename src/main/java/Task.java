@@ -12,8 +12,12 @@ public class Task {
         this.isDone = true;
     }
 
-    public boolean getTaskStatus(){
-        return isDone;
+    public String getTaskStatus(){
+        if (isDone == true){
+            return "✓";
+        } else {
+            return "✗";
+        }
     }
 
     public String getTaskDescription(){

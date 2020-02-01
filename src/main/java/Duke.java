@@ -2,12 +2,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void updateTaskStatus(Task taskToCheck){
-        taskToCheck.setTaskAsDone();
-        System.out.println("Nice! I have marked this task as done:");
-        System.out.println("[✓] " + taskToCheck.getTaskDescription());
-    }
-
     public static void welcomeMessage(){
         String logo = "  __  .__             /\\            .___     __           \n" +
                 "_/  |_|__| ____    ___)/ ______   __| _/_ __|  | __ ____  \n" +
@@ -20,8 +14,13 @@ public class Duke {
         System.out.println("____________________________________________________________________");
     }
 
+    public static void updateTaskStatus(Task taskToCheck){
+        taskToCheck.setTaskAsDone();
+        System.out.println("Nice! I have marked this task as done:");
+        System.out.println(taskToCheck);
+    }
+
     public static void main(String[] args) {
-        //String [] totalTasks = new String[100];
         Task [] totalTasks = new Task[100];
         int index = 0;
 
@@ -35,21 +34,39 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < index; i += 1){
                     System.out.print((i + 1) + ". ");
-                    if (totalTasks[i].getTaskStatus()){
-                        System.out.print("[✓] ");
-                    } else {
-                        System.out.print("[✗] ");
-                    }
-                    System.out.println(totalTasks[i].getTaskDescription());
+                    System.out.println(totalTasks[i]);
                 }
             } else if (userInput.contains("done")){
                 String [] splitInput = userInput.split(" ");
                 updateTaskStatus(totalTasks[Integer.parseInt(splitInput[1].trim()) - 1]);
             } else {
-                Task newTask = new Task(userInput);
-                System.out.println("added: " + newTask.getTaskDescription());
+                String [] task = userInput.split("/");
+                // to split the string and check what type of task it is
+                String [] taskDescription = task[0].split(" ", 2);
+                String [] taskDate = new String[0];
+                if (task.length > 1){
+                    taskDate = task[1].split(" ", 2);
+                }
+                Task newTask;
+                switch (taskDescription[0].trim()){
+                case "todo":
+                   newTask = new ToDo(taskDescription[1]);
+                   break;
+                case "event":
+                    newTask = new Event(taskDescription[1], taskDate[1]);
+                    break;
+                case "deadline":
+                    newTask = new Deadline(taskDescription[1], taskDate[1]);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + taskDescription[0].trim());
+                }
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newTask);
                 totalTasks[index] = newTask;
                 index += 1;
+                System.out.println("Now you have " + index + " tasks in the list.");
             }
             System.out.println("____________________________________________________________________");
             userInput = input.nextLine();
