@@ -14,6 +14,40 @@ public class Duke {
         System.out.println("____________________________________________________________________");
     }
 
+    public static Task createNewTask(String userInput){
+        String [] task = userInput.split("/");
+        String [] taskDescription = task[0].split(" ", 2);
+        String [] taskDate = new String[0];
+        if (task.length > 1) {
+            taskDate = task[1].split(" ", 2);
+        }
+        Task newTask;
+        switch (taskDescription[0].trim()){
+        case "todo":
+            newTask = new ToDo(taskDescription[1]);
+            break;
+        case "event":
+            newTask = new Event(taskDescription[1], taskDate[1]);
+            break;
+        case "deadline":
+            newTask = new Deadline(taskDescription[1], taskDate[1]);
+            break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + taskDescription[0].trim());
+        }
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println(newTask);
+        return newTask;
+    }
+
+    public static void printAllTasks(Task [] totalTasks, int index){
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < index; i += 1){
+            System.out.println((i + 1) + ". " + totalTasks[i]);
+        }
+    }
+
     public static void updateTaskStatus(Task taskToCheck){
         taskToCheck.setTaskAsDone();
         System.out.println("Nice! I have marked this task as done:");
@@ -31,40 +65,12 @@ public class Duke {
 
         while (!userInput.equals("bye")){
             if (userInput.equals("list")){
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < index; i += 1){
-                    System.out.print((i + 1) + ". ");
-                    System.out.println(totalTasks[i]);
-                }
+                printAllTasks(totalTasks, index);
             } else if (userInput.contains("done")){
                 String [] splitInput = userInput.split(" ");
                 updateTaskStatus(totalTasks[Integer.parseInt(splitInput[1].trim()) - 1]);
             } else {
-                String [] task = userInput.split("/");
-                // to split the string and check what type of task it is
-                String [] taskDescription = task[0].split(" ", 2);
-                String [] taskDate = new String[0];
-                if (task.length > 1){
-                    taskDate = task[1].split(" ", 2);
-                }
-                Task newTask;
-                switch (taskDescription[0].trim()){
-                case "todo":
-                   newTask = new ToDo(taskDescription[1]);
-                   break;
-                case "event":
-                    newTask = new Event(taskDescription[1], taskDate[1]);
-                    break;
-                case "deadline":
-                    newTask = new Deadline(taskDescription[1], taskDate[1]);
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + taskDescription[0].trim());
-                }
-
-                System.out.println("Got it. I've added this task:");
-                System.out.println(newTask);
-                totalTasks[index] = newTask;
+                totalTasks[index] = createNewTask(userInput);
                 index += 1;
                 System.out.println("Now you have " + index + " tasks in the list.");
             }
