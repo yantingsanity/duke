@@ -1,4 +1,6 @@
-package duke.task;
+package duke.task.commands;
+
+import duke.task.Task;
 
 public class Deadline extends Task {
     private char taskType;

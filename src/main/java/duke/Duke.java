@@ -1,10 +1,10 @@
 package duke;
 
 import duke.exceptions.InvalidInputException;
-import duke.task.Deadline;
-import duke.task.Event;
+import duke.task.commands.Deadline;
+import duke.task.commands.Event;
 import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.commands.ToDo;
 
 import java.util.Scanner;
 

@@ -1,6 +1,8 @@
-package duke.task;
+package duke.task.commands;
 
-public class Event extends Task{
+import duke.task.Task;
+
+public class Event extends Task {
     private char taskType;
     private String eventDate;
 
