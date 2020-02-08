@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exceptions.InvalidInputException;
+import duke.task.commands.Deadline;
+import duke.task.commands.Event;
+import duke.task.Task;
+import duke.task.commands.ToDo;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -14,7 +22,7 @@ public class Duke {
         System.out.println("____________________________________________________________________");
     }
 
-    public static Task createNewTask(String userInput) throws InvalidInputException{
+    public static Task createNewTask(String userInput) throws InvalidInputException {
         String [] task = userInput.split("/");
         String [] taskDescription = task[0].split(" ", 2);
         String [] taskDate = new String[0];
