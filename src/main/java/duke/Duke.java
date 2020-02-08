@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void welcomeMessage(){
+    public static void getWelcomeMessage(){
         String logo = "  __  .__             /\\            .___     __           \n" +
                 "_/  |_|__| ____    ___)/ ______   __| _/_ __|  | __ ____  \n" +
                 "\\   __\\  |/    \\  / ___\\/  ___/  / __ |  |  \\  |/ // __ \\ \n" +
@@ -76,11 +76,11 @@ public class Duke {
         System.out.println(taskToCheck);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Task [] totalTasks = new Task[100];
         int index = 0;
 
-        welcomeMessage();
+        getWelcomeMessage();
 
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
