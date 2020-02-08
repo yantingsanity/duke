@@ -21,19 +21,23 @@ public class Duke {
         if (task.length > 1) {
             taskDate = task[1].split(" ", 2);
         }
-        Task newTask;
-        switch (taskDescription[0].trim()){
-        case "todo":
-            newTask = new ToDo(taskDescription[1]);
-            break;
-        case "event":
-            newTask = new Event(taskDescription[1], taskDate[1]);
-            break;
-        case "deadline":
-            newTask = new Deadline(taskDescription[1], taskDate[1]);
-            break;
-        default:
-            throw new IllegalStateException("Unexpected value: " + taskDescription[0].trim());
+        Task newTask = null;
+        try {
+            switch (taskDescription[0].trim()){
+            case "todo":
+                newTask = new ToDo(taskDescription[1]);
+                break;
+            case "event":
+                newTask = new Event(taskDescription[1], taskDate[1]);
+                break;
+            case "deadline":
+                newTask = new Deadline(taskDescription[1], taskDate[1]);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + taskDescription[0].trim());
+            }
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("There is a missing parameter in your input!");
         }
 
         System.out.println("Got it. I've added this task:");
