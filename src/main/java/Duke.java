@@ -14,7 +14,7 @@ public class Duke {
         System.out.println("____________________________________________________________________");
     }
 
-    public static Task createNewTask(String userInput){
+    public static Task createNewTask(String userInput) throws InvalidInputException{
         String [] task = userInput.split("/");
         String [] taskDescription = task[0].split(" ", 2);
         String [] taskDate = new String[0];
@@ -34,15 +34,25 @@ public class Duke {
                 newTask = new Deadline(taskDescription[1], taskDate[1]);
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + taskDescription[0].trim());
+                throw new InvalidInputException();
             }
-        } catch (IndexOutOfBoundsException e){
-            System.out.println("There is a missing parameter in your input!");
-        }
+            System.out.println("Got it. I've added this task:");
+            System.out.println(newTask);
+            return newTask;
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newTask);
-        return newTask;
+        } catch (IndexOutOfBoundsException e){
+            getHelpMessage();
+            return null;
+        }
+    }
+
+    public static void getHelpMessage() {
+        System.out.println("There is a missing parameter in your input!");
+        System.out.println("Some help for you!! :)");
+        System.out.println("3 different ways to add tasks into the list:");
+        System.out.println("+ event <event_name> /at <event date> <event time>");
+        System.out.println("+ todo <todo_task>");
+        System.out.println("+ deadline <deadline_task> /by <deadline date> <deadline time>");
     }
 
     public static void printAllTasks(Task [] totalTasks, int index){
@@ -66,21 +76,27 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
-
-        while (!userInput.equals("bye")){
-            if (userInput.equals("list")){
-                printAllTasks(totalTasks, index);
-            } else if (userInput.contains("done")){
-                String [] splitInput = userInput.split(" ");
-                updateTaskStatus(totalTasks[Integer.parseInt(splitInput[1].trim()) - 1]);
-            } else {
-                totalTasks[index] = createNewTask(userInput);
-                index += 1;
-                System.out.println("Now you have " + index + " tasks in the list.");
+        try {
+            while (!userInput.equals("bye")){
+                if (userInput.equals("list")){
+                    printAllTasks(totalTasks, index);
+                } else if (userInput.contains("done")){
+                    String [] splitInput = userInput.split(" ");
+                    updateTaskStatus(totalTasks[Integer.parseInt(splitInput[1].trim()) - 1]);
+                } else {
+                    totalTasks[index] = createNewTask(userInput);
+                    if (totalTasks[index] != null) {
+                        index += 1;
+                        System.out.println("Now you have " + index + " tasks in the list.");
+                    }
+                }
+                System.out.println("____________________________________________________________________");
+                userInput = input.nextLine();
             }
-            System.out.println("____________________________________________________________________");
-            userInput = input.nextLine();
+        } catch (InvalidInputException e){
+            System.out.println("OOPS ONO, I'm so sorry, but I don't know what this (" + userInput + ") means");
         }
+
         System.out.println("BYE BYE SEE YOU BACK SOON!");
         input.close();
     }
