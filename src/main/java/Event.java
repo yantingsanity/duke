@@ -8,7 +8,7 @@ public class Event extends Task{
         eventDate = date;
     }
 
-    public String toString(){
+    public String toString() {
         return "[" + taskType + "][" + super.getTaskStatus() + "] " + super.getTaskDescription() +
                 " (at: " + eventDate + ")";
     }

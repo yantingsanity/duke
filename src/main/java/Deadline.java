@@ -7,7 +7,7 @@ public class Deadline extends Task {
         deadlineDate = date;
     }
 
-    public String toString(){
+    public String toString() {
         return "[" + taskType + "][" + super.getTaskStatus() + "] " + super.getTaskDescription() +
                 " (by: " + deadlineDate + ")";
     }

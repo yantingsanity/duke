@@ -2,17 +2,17 @@ public class Task {
     private String description;
     private boolean isDone;
 
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         isDone = false;
     }
 
     //set the Task as done
-    public void setTaskAsDone(){
+    public void setTaskAsDone() {
         this.isDone = true;
     }
 
-    public String getTaskStatus(){
+    public String getTaskStatus() {
         if (isDone == true){
             return "✓";
         } else {
@@ -20,7 +20,7 @@ public class Task {
         }
     }
 
-    public String getTaskDescription(){
+    public String getTaskDescription() {
         return description;
     }
 }

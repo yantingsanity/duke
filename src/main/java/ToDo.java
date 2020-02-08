@@ -6,7 +6,7 @@ public class ToDo extends Task {
         taskType = 'T';
     }
 
-    public String toString(){
+    public String toString() {
         return "[" + taskType + "][" + super.getTaskStatus() + "] " + super.getTaskDescription();
     }
 }
