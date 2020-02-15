@@ -64,10 +64,15 @@ public class Duke {
     }
 
     public static void printAllTasks(Task [] totalTasks, int index){
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < index; i += 1){
-            System.out.println((i + 1) + ". " + totalTasks[i]);
+        if (index > 0){
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < index; i += 1){
+                System.out.println((i + 1) + ". " + totalTasks[i]);
+            }
+        } else {
+            System.out.println("There are currently no tasks now! Time to start adding!");
         }
+
     }
 
     public static void updateTaskStatus(Task taskToCheck){
