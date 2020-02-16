@@ -61,6 +61,12 @@ public class Duke {
                     task.setTaskAsDone();
                     System.out.println("Nice! I have marked this task as done:");
                     System.out.println(task);
+                } else if (updateType.equals("delete")) {
+                    System.out.println("Noted. I've removed this task:");
+                    task.setTaskAsDone();
+                    System.out.println(task);
+                    totalTasks.remove(index);
+                    System.out.println("Now you have " + totalTasks.size() + " in the list.");
                 } else {
                     getHelpMessage();
                 }
@@ -106,7 +112,8 @@ public class Duke {
     }
 
     public static void writeToFile() throws IOException {
-        String filepath = "./src/main/java/duke/data/duke.txt";
+        //String filepath = "../../../src/main/java/duke/data/duke.txt";
+        String filepath = "src/main/java/duke/data/duke.txt";
         FileWriter fw = new FileWriter(filepath);
         String stringToWrite = "";
         for (Task task : totalTasks){
@@ -133,7 +140,8 @@ public class Duke {
 
     public static void loadFileToTotalTasks() {
         try {
-            File f = new File("./src/main/java/duke/data/duke.txt");
+            //File f = new File("../../../src/main/java/duke/data/duke.txt");
+            File f = new File("src/main/java/duke/data/duke.txt");
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String newLine = s.nextLine();
@@ -171,7 +179,7 @@ public class Duke {
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")){
                 printAllTasks();
-            } else if (userInput.contains("done")){
+            } else if (userInput.contains("done") || userInput.contains("delete")){
                 updateTaskStatus(userInput);
                 try {
                     writeToFile();
