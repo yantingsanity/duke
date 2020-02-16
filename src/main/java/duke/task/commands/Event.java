@@ -16,4 +16,14 @@ public class Event extends Task {
         return "[" + taskType + "][" + super.getTaskStatus() + "] " + super.getTaskDescription() +
                 " (at: " + eventDate + ")";
     }
+
+    @Override
+    public String getDate(){
+        return this.eventDate;
+    }
+
+    @Override
+    public char getTaskType(){
+        return this.taskType;
+    }
 }
