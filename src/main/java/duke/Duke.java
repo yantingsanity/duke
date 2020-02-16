@@ -6,9 +6,12 @@ import duke.task.commands.Deadline;
 import duke.task.commands.Event;
 import duke.task.commands.ToDo;
 
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -58,12 +61,6 @@ public class Duke {
                     task.setTaskAsDone();
                     System.out.println("Nice! I have marked this task as done:");
                     System.out.println(task);
-                } else if (updateType.equals("delete")) {
-                    System.out.println("Noted. I've removed this task:");
-                    task.setTaskAsDone();
-                    System.out.println(task);
-                    totalTasks.remove(index);
-                    System.out.println("Now you have " + totalTasks.size() + " in the list.");
                 } else {
                     getHelpMessage();
                 }
@@ -108,9 +105,65 @@ public class Duke {
         }
     }
 
+    public static void writeToFile() throws IOException {
+        String filepath = "./src/main/java/duke/data/duke.txt";
+        FileWriter fw = new FileWriter(filepath);
+        String stringToWrite = "";
+        for (Task task : totalTasks){
+            String status = "";
+            if (task.getTaskStatus() == "✓"){
+                status = "1";
+            } else {
+                status = "0";
+            }
+
+            switch (task.getTaskType()){
+            case 'T':
+                stringToWrite = task.getTaskType() + "," + status + "," + task.getTaskDescription() + "\n";
+                break;
+            case 'E':
+            case 'D':
+                stringToWrite = task.getTaskType() + "," + status + "," + task.getTaskDescription() + "," + task.getDate() + "\n";
+                break;
+            }
+            fw.write(stringToWrite);
+        }
+        fw.close();
+    }
+
+    public static void loadFileToTotalTasks() {
+        try {
+            File f = new File("./src/main/java/duke/data/duke.txt");
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String newLine = s.nextLine();
+                String[] contents = newLine.split(",", 4);
+                Task newTask = null;
+                switch (contents[0]) {
+                case "T":
+                    newTask = new ToDo(contents[2]);
+                    break;
+                case "E":
+                    newTask = new Event(contents[2], contents[3]);
+                    break;
+                case "D":
+                    newTask = new Deadline(contents[2], contents[3]);
+                    break;
+                }
+                if (contents[1].equals("1")) {
+                    newTask.setTaskAsDone();
+                }
+                totalTasks.add(newTask);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+
     public static void main(String[] args){
 
         getWelcomeMessage();
+        loadFileToTotalTasks();
 
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
@@ -118,11 +171,21 @@ public class Duke {
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")){
                 printAllTasks();
-            } else if (userInput.contains("done") || userInput.contains("delete")){
+            } else if (userInput.contains("done")){
                 updateTaskStatus(userInput);
+                try {
+                    writeToFile();
+                } catch (IOException e){
+                    System.out.println(e);
+                }
             } else {
                 try {
                     addNewTask(userInput);
+                    try {
+                        writeToFile();
+                    } catch (IOException e){
+                        System.out.println(e);
+                    }
                 } catch (InvalidInputException e){
                     System.out.println("OOPS ONO, I'm so sorry, but I don't know what this (" + userInput + ") means");
                     System.out.println("Please try again!");
