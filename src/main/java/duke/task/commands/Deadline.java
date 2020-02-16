@@ -15,4 +15,14 @@ public class Deadline extends Task {
         return "[" + taskType + "][" + super.getTaskStatus() + "] " + super.getTaskDescription() +
                 " (by: " + deadlineDate + ")";
     }
+
+    @Override
+    public String getDate(){
+        return this.deadlineDate;
+    }
+
+    @Override
+    public char getTaskType(){
+        return this.taskType;
+    }
 }

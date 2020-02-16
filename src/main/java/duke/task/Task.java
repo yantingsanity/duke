@@ -25,4 +25,12 @@ public class Task {
     public String getTaskDescription() {
         return description;
     }
+
+    public char getTaskType() {
+        return 0;
+    }
+
+    public String getDate(){
+        return "";
+    }
 }
