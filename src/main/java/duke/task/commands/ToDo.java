@@ -13,4 +13,9 @@ public class ToDo extends Task {
     public String toString() {
         return "[" + taskType + "][" + super.getTaskStatus() + "] " + super.getTaskDescription();
     }
+
+    @Override
+    public char getTaskType() {
+        return this.taskType;
+    }
 }
