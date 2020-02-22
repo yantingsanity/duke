@@ -111,9 +111,27 @@ public class Duke {
         }
     }
 
-    public static void writeToFile() throws IOException {
+    public static String getFilePath() {
+
+        String home = System.getProperty("user.dir");
+        String filepath = home + "/src/main/java/duke/data/duke.txt";
+        boolean doesDirectoryExist = new java.io.File(filepath).exists();
+
+        if (!doesDirectoryExist){
+            filepath = home + "/duke.txt";
+            File newFile = new File(filepath);
+            try {
+                newFile.createNewFile();
+            } catch (IOException e){
+                System.out.println("File cannot be created!");
+            }
+        }
+        return filepath;
+    }
+
+    public static void writeToFile(String filepath) throws IOException {
         //String filepath = "../../../src/main/java/duke/data/duke.txt";
-        String filepath = "src/main/java/duke/data/duke.txt";
+        //String filepath = "src/main/java/duke/data/duke.txt";
         FileWriter fw = new FileWriter(filepath);
         String stringToWrite = "";
         for (Task task : totalTasks){
@@ -138,10 +156,11 @@ public class Duke {
         fw.close();
     }
 
-    public static void loadFileToTotalTasks() {
+    public static void loadFileToTotalTasks(String filepath) {
         try {
             //File f = new File("../../../src/main/java/duke/data/duke.txt");
-            File f = new File("src/main/java/duke/data/duke.txt");
+            //File f = new File("src/main/java/duke/data/duke.txt");
+            File f = new File(filepath);
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String newLine = s.nextLine();
@@ -171,7 +190,8 @@ public class Duke {
     public static void main(String[] args){
 
         getWelcomeMessage();
-        loadFileToTotalTasks();
+        String filePath = getFilePath();
+        loadFileToTotalTasks(filePath);
 
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
@@ -182,7 +202,7 @@ public class Duke {
             } else if (userInput.contains("done") || userInput.contains("delete")){
                 updateTaskStatus(userInput);
                 try {
-                    writeToFile();
+                    writeToFile(filePath);
                 } catch (IOException e){
                     System.out.println(e);
                 }
@@ -190,7 +210,7 @@ public class Duke {
                 try {
                     addNewTask(userInput);
                     try {
-                        writeToFile();
+                        writeToFile(filePath);
                     } catch (IOException e){
                         System.out.println(e);
                     }
