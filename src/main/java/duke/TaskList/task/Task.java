@@ -1,4 +1,4 @@
-package duke.task;
+package duke.TaskList.task;
 
 public class Task {
     private String description;
@@ -9,7 +9,7 @@ public class Task {
         isDone = false;
     }
 
-    //set the duke.task.Task as done
+    //set the duke.TaskList.task.task.Task as done
     public void setTaskAsDone() {
         this.isDone = true;
     }
