@@ -31,7 +31,8 @@ public class UI {
                 "   c) event <event_name> /at <event date> <event time>\n" +
                 "3) done <index>: To indicate that the task is done\n" +
                 "4) delete <index>: To delete a task\n" +
-                "5) bye: To end the program";
+                "5) find <keyword>: To find specific tasks in the tasks list\n" +
+                "6) bye: To end the program";
         System.out.println(helpMessage);
     }
 
@@ -58,7 +59,7 @@ public class UI {
             System.out.println("There is currently no tasks in the list!");
             break;
         case "indexOutOfBounds":
-            System.out.println("Please choose a correct index!");
+            System.out.println("Please choose a correct index/key in a word for us to search!");
             break;
         case "fileCreation":
             System.out.println("File cannot be created!");

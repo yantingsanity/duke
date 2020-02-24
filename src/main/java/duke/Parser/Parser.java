@@ -49,6 +49,8 @@ public class Parser {
                     this.totalTasks.setTaskDone(this.userCommand);
                 } else if (this.userCommand.contains("delete")){
                     this.totalTasks.deleteTask(this.userCommand);
+                } else if (this.userCommand.contains("find")) {
+                    this.totalTasks.findTasks(taskDescriptions[1]);
                 } else {
                     taskCommand(this.totalTasks);
                 }
