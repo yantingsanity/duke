@@ -9,6 +9,7 @@ import duke.exceptions.InvalidListSizeException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -44,6 +45,8 @@ public class Duke {
                 ui.getErrorMessage("indexOutOfBounds");
             } catch (IOException e){
                 ui.getErrorMessage("fileIOModified");
+            } catch (DateTimeParseException e){
+                ui.getErrorMessage("dateTime");
             }
             System.out.println("____________________________________________________________________");
         }

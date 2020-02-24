@@ -65,6 +65,8 @@ public class UI {
             break;
         case "fileIOModified":
             System.out.println("Error with the file!");
+        case "dateTime":
+            System.out.println("Please key in the date in the correct format of yyyy-mm-dd hh:mm, thank you!");
         default:
             getHelpMessage();
         }

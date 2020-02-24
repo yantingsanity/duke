@@ -10,6 +10,7 @@ import duke.exceptions.InvalidInputException;
 import duke.exceptions.InvalidListSizeException;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 import static duke.Duke.storage;
 
@@ -51,6 +52,7 @@ public class Parser {
                 } else {
                     taskCommand(this.totalTasks);
                 }
+                System.out.println(totalTasks);
                 storage.writeToFile(this.totalTasks);
             }
         }
@@ -60,7 +62,7 @@ public class Parser {
         return this.taskStrings[1].split(" ", 2)[1];
     }
 
-    public void taskCommand(TaskList totalTasks) throws InvalidInputException {
+    public void taskCommand(TaskList totalTasks) throws InvalidInputException, DateTimeParseException {
         Task newTask;
         try {
             switch (this.taskDescriptions[0].trim()) {
