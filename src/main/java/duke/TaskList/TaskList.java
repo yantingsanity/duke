@@ -136,5 +136,8 @@ public class TaskList {
                 System.out.println((++index) + ". " + newTask);
             }
         }
+        if (index == 0){
+            System.out.println("There are no tasks with that keyword! :(");
+        }
     }
 }

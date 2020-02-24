@@ -3,7 +3,6 @@ package duke.TaskList.task.commands;
 import duke.TaskList.task.Task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -67,11 +66,6 @@ public class Event extends Task {
      *
      * @return date for the task.
      */
-
-    @Override
-    public char getTaskType() {
-        return this.taskType;
-    }
 
     @Override
     public LocalDateTime getDateTime() {

@@ -120,16 +120,14 @@ public class Storage {
         }
         FileWriter fw = new FileWriter(this.pathToFile);
         String stringToWrite = "";
-        listToSave.printTaskList();
+
         for (Task task : listToSave.totalTasks){
-            System.out.println(task);
             String status = "";
             if (task.getTaskStatus() == "✓"){
                 status = "1";
             } else {
                 status = "0";
             }
-            System.out.println(task.getTaskType());
             switch (task.getTaskType()){
             case 'T':
                 stringToWrite = task.getTaskType() + "," + status + "," + task.getTaskDescription() + "\n";

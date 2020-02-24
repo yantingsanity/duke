@@ -89,7 +89,6 @@ public class Parser {
                 } else {
                     taskCommand(this.totalTasks);
                 }
-                System.out.println(totalTasks);
                 storage.writeToFile(this.totalTasks);
             }
         }

@@ -1,6 +1,8 @@
 package duke.TaskList.task.commands;
 
 import duke.TaskList.task.Task;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -34,7 +36,8 @@ public class Deadline extends Task {
             date = dateTimeSplit[0] + "T" + dateTimeSplit[1];
             deadlineDateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME);
         } else {
-            deadlineDateTime = LocalDateTime.parse(date, dateFormat);
+            LocalDate eventDate = LocalDate.parse(date);
+            deadlineDateTime = eventDate.atStartOfDay();
         }
     }
 
