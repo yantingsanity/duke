@@ -15,6 +15,16 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * <h1>Storage</h1>
+ * The Storage class deals with the input and output functions
+ * of the "duke.txt" file.
+ *
+ * @author  Lim Yan Ting
+ * @version 2.0
+ * @since   2020-02-24
+ */
+
 public class Storage {
     public boolean doesFileExist;
     String pathToFile = "";
@@ -24,6 +34,12 @@ public class Storage {
         this.pathToFile = filePath;
         this.doesFileExist = checkIfFileExists();
     }
+
+    /**
+     * Creates a new "duke.txt" file if it cannot be found.
+     *
+     * @return Nothing
+     */
 
     public void createFile() {
         String filepath = this.homePath + "\\duke.txt";
@@ -36,6 +52,13 @@ public class Storage {
         this.pathToFile = filepath;
     }
 
+    /**
+     * Returns true if the file exists.
+     * Else, return false.
+     *
+     * @return true if file exists, else false.
+     */
+
     public boolean checkIfFileExists() {
         String filepath = this.homePath + this.pathToFile;
         System.out.println(filepath);
@@ -44,7 +67,15 @@ public class Storage {
         return this.doesFileExist;
     }
 
+    /**
+     * Returns the list of tasks loaded from "duke.txt".
+     *
+     * @return list of tasks loaded from file
+     * @throws FileNotFoundException  If file cannot be found.
+     */
+
     public TaskList loadFile() throws FileNotFoundException, DateTimeParseException {
+
         TaskList newTasks = new TaskList();
 
         File f = new File(this.pathToFile);
@@ -72,7 +103,18 @@ public class Storage {
         return newTasks;
     }
 
+
+    /**
+     * Returns lateral location of the specified position.
+     * If the position is unset, NaN is returned.
+     *
+     * @param listToSave current list of tasks to save into file
+     * @return Nothing
+     * @throws IOException if file canno be opened or written to.
+     */
+  
     public void writeToFile(TaskList listToSave) throws IOException, InvalidListSizeException {
+
         if (!this.doesFileExist){
             createFile();
         }
