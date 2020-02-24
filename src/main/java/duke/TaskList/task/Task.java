@@ -1,6 +1,8 @@
-package duke.task;
+package duke.TaskList.task;
 
-public class Task {
+import java.time.LocalDateTime;
+
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -9,7 +11,7 @@ public class Task {
         isDone = false;
     }
 
-    //set the duke.task.Task as done
+    //set the duke.TaskList.task.task.Task as done
     public void setTaskAsDone() {
         this.isDone = true;
     }
@@ -30,7 +32,15 @@ public class Task {
         return 0;
     }
 
-    public String getDate(){
-        return "";
+    public LocalDateTime getDateTime() {
+        return null;
     }
+
+    public String getDateTimeString() {
+        return "";
+    };
+
+    public String getDateTimeStringFormat2() {
+        return "";
+    };
 }
