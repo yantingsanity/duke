@@ -10,7 +10,10 @@ package duke.TaskList.task;
  * @since   2020-02-24
  */
 
-public class Task {
+import java.time.LocalDateTime;
+
+public abstract class Task {
+
     private String description;
     private boolean isDone;
 
@@ -70,7 +73,15 @@ public class Task {
      * @return date for the task
      */
 
-    public String getDate(){
-        return "";
+    public LocalDateTime getDateTime() {
+        return null;
     }
+
+    public String getDateTimeString() {
+        return "";
+    };
+
+    public String getDateTimeStringFormat2() {
+        return "";
+    };
 }

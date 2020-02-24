@@ -10,6 +10,7 @@ import duke.exceptions.InvalidInputException;
 import duke.exceptions.InvalidListSizeException;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 import static duke.Duke.storage;
 
@@ -83,9 +84,12 @@ public class Parser {
                     this.totalTasks.setTaskDone(this.userCommand);
                 } else if (this.userCommand.contains("delete")){
                     this.totalTasks.deleteTask(this.userCommand);
+                } else if (this.userCommand.contains("find")) {
+                    this.totalTasks.findTasks(taskDescriptions[1]);
                 } else {
                     taskCommand(this.totalTasks);
                 }
+                System.out.println(totalTasks);
                 storage.writeToFile(this.totalTasks);
             }
         }
@@ -109,8 +113,7 @@ public class Parser {
      * @param totalTasks the current list of tasks
      * @throws InvalidInputException  If commands are invalid
      */
-
-    public void taskCommand(TaskList totalTasks) throws InvalidInputException {
+    public void taskCommand(TaskList totalTasks) throws InvalidInputException, DateTimeParseException {
         Task newTask;
         try {
             switch (this.taskDescriptions[0].trim()) {

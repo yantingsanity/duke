@@ -128,4 +128,13 @@ public class TaskList {
             printTotalSize();
         }
     }
+
+    public void findTasks(String findString){
+        int index = 0;
+        for (Task newTask : totalTasks){
+            if (newTask.getTaskDescription().contains(findString)){
+                System.out.println((++index) + ". " + newTask);
+            }
+        }
+    }
 }

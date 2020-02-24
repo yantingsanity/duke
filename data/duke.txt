@@ -1,6 +1,5 @@
-T,1,read book
-D,0,return book,June 6th
-D,0,return book,June 6th
-T,0,read a history book
-T,0,read a new book
-T,0,read a new book
+E,0,hello world ,2020-01-01 12:00
+T,0,math homework 
+D,0,essay ,2019-01-02 12:00
+E,0,carnival ,2018-01-01 12:00
+E,0,party ,2017-03-20 00:00

@@ -1,6 +1,11 @@
 package duke.TaskList.task.commands;
 
 import duke.TaskList.task.Task;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * <h1>Event</h1>
@@ -14,12 +19,25 @@ import duke.TaskList.task.Task;
 
 public class Event extends Task {
     private char taskType;
-    private String eventDate;
+    private LocalDateTime eventDateTime;
+    DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    DateTimeFormatter dateTimeFormat2 = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     public Event(String description, String date) {
         super(description);
         taskType = 'E';
-        eventDate = date;
+        getDateTime(date);
+    }
+
+    public void getDateTime(String date) throws DateTimeParseException {
+        String [] dateTimeSplit = date.split(" ");
+        if (dateTimeSplit.length > 1){
+            date = dateTimeSplit[0] + "T" + dateTimeSplit[1];
+            eventDateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME);
+        } else {
+            LocalDate eventDate = LocalDate.parse(date);
+            eventDateTime = eventDate.atStartOfDay();
+        }
     }
 
     /**
@@ -30,7 +48,7 @@ public class Event extends Task {
 
     public String toString() {
         return "[" + taskType + "][" + super.getTaskStatus() + "] " + super.getTaskDescription() +
-                " (at: " + eventDate + ")";
+                " (at: " + getDateTimeStringFormat2() + ")";
     }
 
     /**
@@ -51,7 +69,23 @@ public class Event extends Task {
      */
 
     @Override
-    public String getDate() {
-        return this.eventDate;
+    public char getTaskType() {
+        return this.taskType;
     }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        return eventDateTime;
+    }
+
+    @Override
+    public String getDateTimeString(){
+        return eventDateTime.format(dateTimeFormat);
+    }
+
+    @Override
+    public String getDateTimeStringFormat2(){
+        return eventDateTime.format(dateTimeFormat2);
+    }
+
 }
