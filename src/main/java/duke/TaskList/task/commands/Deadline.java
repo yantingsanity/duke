@@ -30,6 +30,14 @@ public class Deadline extends Task {
         getDateTime(date);
     }
 
+    /**
+     * Converts the String dateTime into a LocalDateTime object.
+     *
+     * @param date the date and time in String
+     * @return Nothing
+     * @throws DateTimeParseException if the date and time are not in the correct format
+     */
+
     public void getDateTime(String date) throws DateTimeParseException {
         String [] dateTimeSplit = date.split(" ");
         if (dateTimeSplit.length > 1){
@@ -73,10 +81,22 @@ public class Deadline extends Task {
         return deadlineDateTime;
     }
 
+    /**
+     * Gets the date for this Deadline task in terms of String format (yyyy-MM-dd HH:mm)
+     *
+     * @return date for the task.
+     */
+
     @Override
     public String getDateTimeString(){
         return deadlineDateTime.format(dateTimeFormat);
     }
+
+    /**
+     * Gets the date for this Deadline task in terms of String format (MMM d yyyy)
+     *
+     * @return date for the task.
+     */
 
     @Override
     public String getDateTimeStringFormat2(){

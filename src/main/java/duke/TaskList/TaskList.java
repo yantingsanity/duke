@@ -129,6 +129,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds a specific task with the given keyword supplied by the user.
+     *
+     * @param findString the keyword that user supplied
+     * @return Nothing
+     */
+
     public void findTasks(String findString){
         int index = 0;
         for (Task newTask : totalTasks){

@@ -77,10 +77,21 @@ public abstract class Task {
         return null;
     }
 
+    /**
+     * Gets the date for this task in terms of String format (yyyy-MM-dd HH:mm)
+     *
+     * @return date for the task.
+     */
+
     public String getDateTimeString() {
         return "";
     };
 
+    /**
+     * Gets the date for this task in terms of String format (MMM d yyyy)
+     *
+     * @return date for the task.
+     */
     public String getDateTimeStringFormat2() {
         return "";
     };
