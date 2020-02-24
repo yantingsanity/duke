@@ -58,7 +58,7 @@ public class UI {
             System.out.println("There is currently no tasks in the list!");
             break;
         case "indexOutOfBounds":
-            System.out.println("Please choose a correct index!");
+            System.out.println("Please choose a correct index/key in a word for us to search!");
             break;
         case "fileCreation":
             System.out.println("File cannot be created!");
