@@ -44,7 +44,7 @@ public class Parser {
      * @return true if user inputted bye, else false
      */
 
-    public boolean isBye (){
+    public boolean isBye() {
         if (this.userCommand.equals("bye")){
             return true;
         }
@@ -58,7 +58,7 @@ public class Parser {
      * @return Nothing
      */
 
-    public void readUserInput(String userInput){
+    public void readUserInput(String userInput) {
         this.taskStrings = userInput.split("/");
         this.userCommand = userInput;
     }
@@ -128,7 +128,7 @@ public class Parser {
             default:
                 throw new InvalidInputException(this.userCommand);
             }
-            totalTasks.addNewTask(newTask);
+            totalTasks.addNewTask(newTask, "new");
             totalTasks.printTotalSize();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There is a missing parameter in your input!");

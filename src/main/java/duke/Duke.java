@@ -26,6 +26,7 @@ public class Duke {
     public static Storage storage;
     private static TaskList totalTasks;
     private static UI ui;
+    private static Parser newParser;
 
     /**
      * Initialise the Duke application with new Storage and UI.
@@ -36,7 +37,7 @@ public class Duke {
 
     public static void initialise() {
         ui = new UI();
-        storage = new Storage("\\data\\duke.txt");
+        storage = new Storage("\\duke.txt");
         try {
             totalTasks = storage.loadFile();
         } catch (FileNotFoundException e){
@@ -53,9 +54,9 @@ public class Duke {
 
     public static void run() {
         boolean isBye = false;
-        Parser newParser = new Parser(totalTasks);
+        newParser = new Parser(totalTasks);
         while (!isBye){
-            String userInput = UI.getUserInput();
+            String userInput = ui.getUserInput();
             newParser.readUserInput(userInput);
             try {
                 newParser.executeCommand();
@@ -81,11 +82,11 @@ public class Duke {
      * @return Nothing
      */
 
-    public static void end(){
-        UI.closeInput();
+    public static void end() {
+        ui.closeInput();
     }
 
-    public static void main(String [] args){
+    public static void main(String [] args) {
         initialise();
         run();
         end();

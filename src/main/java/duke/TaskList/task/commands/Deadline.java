@@ -14,15 +14,17 @@ import java.time.format.DateTimeParseException;
  *
  * @author  Lim Yan Ting
  * @version 2.0
- * @since   2020-02-24
+ * @since   2020-02-29
  */
 
 public class Deadline extends Task {
     private char taskType;
     private LocalDateTime deadlineDateTime;
+    private LocalDate deadlineDateOnly;
     DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-mm-dd");
-    DateTimeFormatter dateTimeFormat2 = DateTimeFormatter.ofPattern("MMM d yyyy");
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter dateTimeFormat2 = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+    DateTimeFormatter dateFormat2 = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     public Deadline(String description, String date) {
         super(description);
@@ -39,13 +41,12 @@ public class Deadline extends Task {
      */
 
     public void getDateTime(String date) throws DateTimeParseException {
-        String [] dateTimeSplit = date.split(" ");
-        if (dateTimeSplit.length > 1){
+        String[] dateTimeSplit = date.split(" ");
+        if (dateTimeSplit.length > 1) {
             date = dateTimeSplit[0] + "T" + dateTimeSplit[1];
             deadlineDateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME);
         } else {
-            LocalDate eventDate = LocalDate.parse(date);
-            deadlineDateTime = eventDate.atStartOfDay();
+            deadlineDateOnly = LocalDate.parse(date);
         }
     }
 
@@ -57,7 +58,7 @@ public class Deadline extends Task {
 
     public String toString() {
         return "[" + taskType + "][" + super.getTaskStatus() + "] " + super.getTaskDescription() +
-                " (by: " + getDateTimeStringFormat2() + ")";
+                " (by: " + getDateTimeStringForDuke() + ")";
     }
 
     /**
@@ -72,24 +73,19 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the date for this Deadline task.
-     *
-     * @return date for the task.
-     */
-    @Override
-    public LocalDateTime getDateTime(){
-        return deadlineDateTime;
-    }
-
-    /**
      * Gets the date for this Deadline task in terms of String format (yyyy-MM-dd HH:mm)
+     * This is used to save into our output file.
      *
      * @return date for the task.
      */
 
     @Override
-    public String getDateTimeString(){
-        return deadlineDateTime.format(dateTimeFormat);
+    public String getDateTimeStringForFile() {
+        if (deadlineDateTime == null) {
+            return deadlineDateOnly.format(dateFormat);
+        } else {
+            return deadlineDateTime.format(dateTimeFormat);
+        }
     }
 
     /**
@@ -99,7 +95,11 @@ public class Deadline extends Task {
      */
 
     @Override
-    public String getDateTimeStringFormat2(){
-        return deadlineDateTime.format(dateTimeFormat2);
+    public String getDateTimeStringForDuke() {
+        if (deadlineDateTime == null) {
+            return deadlineDateOnly.format(dateFormat2);
+        } else {
+            return deadlineDateTime.format(dateTimeFormat2);
+        }
     }
 }

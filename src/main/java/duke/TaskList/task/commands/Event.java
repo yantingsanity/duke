@@ -13,14 +13,18 @@ import java.time.format.DateTimeParseException;
  *
  * @author  Lim Yan Ting
  * @version 2.0
- * @since   2020-02-24
+ * @since   2020-02-29
  */
 
 public class Event extends Task {
     private char taskType;
     private LocalDateTime eventDateTime;
+    private LocalDate eventDateOnly;
     DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    DateTimeFormatter dateTimeFormat2 = DateTimeFormatter.ofPattern("MMM d yyyy");
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter dateTimeFormat2 = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+    DateTimeFormatter dateFormat2 = DateTimeFormatter.ofPattern("MMM d yyyy");
+
 
     public Event(String description, String date) {
         super(description);
@@ -42,8 +46,7 @@ public class Event extends Task {
             date = dateTimeSplit[0] + "T" + dateTimeSplit[1];
             eventDateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME);
         } else {
-            LocalDate eventDate = LocalDate.parse(date);
-            eventDateTime = eventDate.atStartOfDay();
+            eventDateOnly = LocalDate.parse(date);
         }
     }
 
@@ -55,7 +58,7 @@ public class Event extends Task {
 
     public String toString() {
         return "[" + taskType + "][" + super.getTaskStatus() + "] " + super.getTaskDescription() +
-                " (at: " + getDateTimeStringFormat2() + ")";
+                " (at: " + getDateTimeStringForDuke() + ")";
     }
 
     /**
@@ -70,25 +73,19 @@ public class Event extends Task {
     }
 
     /**
-     * Gets the date for this Event task.
-     *
-     * @return date for the task.
-     */
-
-    @Override
-    public LocalDateTime getDateTime() {
-        return eventDateTime;
-    }
-
-    /**
      * Gets the date for this Event task in terms of String format (yyyy-MM-dd HH:mm)
+     * This is used to save into our output file.
      *
      * @return date for the task.
      */
 
     @Override
-    public String getDateTimeString(){
-        return eventDateTime.format(dateTimeFormat);
+    public String getDateTimeStringForFile(){
+        if (eventDateTime == null){
+            return eventDateOnly.format(dateFormat);
+        } else {
+            return eventDateTime.format(dateTimeFormat);
+        }
     }
 
     /**
@@ -98,8 +95,12 @@ public class Event extends Task {
      */
 
     @Override
-    public String getDateTimeStringFormat2(){
-        return eventDateTime.format(dateTimeFormat2);
+    public String getDateTimeStringForDuke(){
+        if (eventDateTime == null){
+            return eventDateOnly.format(dateFormat2);
+        } else {
+            return eventDateTime.format(dateTimeFormat2);
+        }
     }
 
 }

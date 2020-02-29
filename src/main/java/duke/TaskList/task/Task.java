@@ -7,10 +7,8 @@ package duke.TaskList.task;
  *
  * @author  Lim Yan Ting
  * @version 2.0
- * @since   2020-02-24
+ * @since   2020-02-29
  */
-
-import java.time.LocalDateTime;
 
 public abstract class Task {
 
@@ -68,22 +66,12 @@ public abstract class Task {
     }
 
     /**
-     * Gets the date for the task if there is any.
-     *
-     * @return date for the task
-     */
-
-    public LocalDateTime getDateTime() {
-        return null;
-    }
-
-    /**
      * Gets the date for this task in terms of String format (yyyy-MM-dd HH:mm)
      *
      * @return date for the task.
      */
 
-    public String getDateTimeString() {
+    public String getDateTimeStringForFile() {
         return "";
     };
 
@@ -92,7 +80,7 @@ public abstract class Task {
      *
      * @return date for the task.
      */
-    public String getDateTimeStringFormat2() {
+    public String getDateTimeStringForDuke() {
         return "";
     };
 }

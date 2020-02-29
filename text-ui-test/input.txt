@@ -1,0 +1,6 @@
+event Colours' Run /at 2019-11-02 09:00
+deadline programming /by 2020-11-12
+list
+delete 1
+done 1
+bye

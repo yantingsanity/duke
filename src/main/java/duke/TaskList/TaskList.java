@@ -51,14 +51,17 @@ public class TaskList {
 
     /**
      * Adds a new task to the current list of tasks.
+     * If addType = "load", do not print any statements.
      *
      * @param newTask the new task to be added
      * @return Nothing
      */
 
-    public void addNewTask(Task newTask) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newTask);
+    public void addNewTask(Task newTask, String addType) {
+        if (!addType.equals("load")) {
+            System.out.println("Got it. I've added this task:");
+            System.out.println(newTask);
+        }
         totalTasks.add(newTask);
     }
 
@@ -79,7 +82,7 @@ public class TaskList {
      * @return returns index which is an ID of the task specified, else -1 if there are no tasks in list
      */
 
-    public int getTaskID(String userCommand){
+    public int getTaskID(String userCommand) {
         int index = 0;
         try {
             String [] inputStrings = userCommand.split(" ");
@@ -123,7 +126,7 @@ public class TaskList {
         if (taskNum != -1){
             Task task = totalTasks.get(taskNum);
             task.setTaskAsDone();
-            System.out.println(task);
+            System.out.println(task + " has been deleted!");
             totalTasks.remove(taskNum);
             printTotalSize();
         }
@@ -136,7 +139,7 @@ public class TaskList {
      * @return Nothing
      */
 
-    public void findTasks(String findString){
+    public void findTasks(String findString) {
         int index = 0;
         for (Task newTask : totalTasks){
             if (newTask.getTaskDescription().contains(findString)){

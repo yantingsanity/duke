@@ -22,7 +22,7 @@ import java.util.Scanner;
  *
  * @author  Lim Yan Ting
  * @version 2.0
- * @since   2020-02-24
+ * @since   2020-02-29
  */
 
 public class Storage {
@@ -61,7 +61,6 @@ public class Storage {
 
     public boolean checkIfFileExists() {
         String filepath = this.homePath + this.pathToFile;
-        System.out.println(filepath);
         this.doesFileExist = new java.io.File(filepath).exists();
         this.pathToFile = filepath;
         return this.doesFileExist;
@@ -98,7 +97,7 @@ public class Storage {
             if (contents[1].equals("1")) {
                 newTask.setTaskAsDone();
             }
-            newTasks.addNewTask(newTask);
+            newTasks.addNewTask(newTask, "load");
         }
         return newTasks;
     }
@@ -135,7 +134,7 @@ public class Storage {
             case 'E':
             case 'D':
                 stringToWrite = task.getTaskType() + "," + status + "," + task.getTaskDescription() + "," +
-                                    task.getDateTimeString() + "\n";
+                                    task.getDateTimeStringForFile() + "\n";
                 break;
             }
             fw.write(stringToWrite);
