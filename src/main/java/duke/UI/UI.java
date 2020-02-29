@@ -45,7 +45,7 @@ public class UI {
      */
 
     public static void getHelpMessage() {
-        String helpMessage = "Here are some help for you!! :) \n" +
+        String helpMessage = "\nHere are some help for you!! :) \n" +
                 "1) list: List out all the tasks in your list \n" +
                 "2) Creation of tasks into list:\n" +
                 "   a) todo <todo_task>\n" +
@@ -89,7 +89,7 @@ public class UI {
     public static void getErrorMessage(String type) {
         switch (type){
         case "fileIO":
-            //System.out.println("File cannot be found! Created a new file instead.");
+            System.out.println("File cannot be found! Created a new file instead.");
             break;
         case "invalidInput":
             System.out.println("You have entered an invalid command!");

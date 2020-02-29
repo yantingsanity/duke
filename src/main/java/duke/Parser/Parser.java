@@ -114,26 +114,31 @@ public class Parser {
      */
     public void taskCommand(TaskList totalTasks) throws InvalidInputException, DateTimeParseException {
         Task newTask;
-        try {
-            switch (this.taskDescriptions[0].trim()) {
-            case "todo":
-                newTask = new ToDo(taskDescriptions[1]);
-                break;
-            case "event":
-                newTask = new Event(taskDescriptions[1], getTaskDate());
-                break;
-            case "deadline":
-                newTask = new Deadline(taskDescriptions[1], getTaskDate());
-                break;
-            default:
-                throw new InvalidInputException(this.userCommand);
+        if (!taskDescriptions[1].equals("")){
+            try {
+                switch (this.taskDescriptions[0].trim()) {
+                case "todo":
+                    newTask = new ToDo(taskDescriptions[1]);
+                    break;
+                case "event":
+                    newTask = new Event(taskDescriptions[1], getTaskDate());
+                    break;
+                case "deadline":
+                    newTask = new Deadline(taskDescriptions[1], getTaskDate());
+                    break;
+                default:
+                    throw new InvalidInputException(this.userCommand);
+                }
+                totalTasks.addNewTask(newTask, "new");
+                totalTasks.printTotalSize();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("There is a missing parameter in your input!");
+                UI.getHelpMessage();
             }
-            totalTasks.addNewTask(newTask, "new");
-            totalTasks.printTotalSize();
-        } catch (IndexOutOfBoundsException e) {
+        } else {
             System.out.println("There is a missing parameter in your input!");
-            UI.getHelpMessage();
         }
+
     }
 
     /**
