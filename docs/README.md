@@ -48,11 +48,11 @@ After listing as shown above, mark the second item on the list as done and the f
  `[T][✓] math homework ` <br>
 
  
- ### 2.3 Delete task from the list: `delete`
+### 2.3 Delete task from the list: `delete`
 This allows you to delete a task from the list.
- #### Usage
+#### Usage
  
- #### `delete` - delete the specified task
+#### `delete` - delete the specified task
  
  Use `list` to view the list of the tasks and choose the number for the task that you want to delete by doing this `delete <INDEX>`.
  
@@ -75,9 +75,9 @@ After listing as shown above, first item will be deleted and the following will 
   
 ### 2.4 Finding a task: `find`
 This allows you to find a specific task from the list.
- #### Usage
+#### Usage
  
- #### `find` - finding a specific task from the list
+#### `find` - finding a specific task from the list
  
 Use `find` to find the task.
 
@@ -91,12 +91,13 @@ Use `find` to find the task.
  
 ### 2.5 Adding tasks into the application
 In this Ting's duke, you will be able add three different type of tasks into the tasks list.  
+
 #### 2.5.1 Adding a ToDo task: `todo`
 This allows you to add in a ToDo task. A ToDo task only consists of task description.
 
- #### Usage
+#### Usage
  
- #### `todo TASK_NAME` - add in a ToDo task
+#### `todo TASK_NAME` - add in a ToDo task
  
 Use `todo TASK_NAME` to add in a task
 
@@ -113,9 +114,9 @@ Use `todo TASK_NAME` to add in a task
 #### 2.5.2 Adding a Deadline task: `deadline`
 This allows you to add in a Deadline task. A Deadline task consists of task description, date and time that the task need to be submitted.
 
- #### Usage
+#### Usage
  
- #### `deadline TASK_NAME /by TASK_DATE [TASK_TIME]` - add in a Deadline task
+#### `deadline TASK_NAME /by TASK_DATE [TASK_TIME]` - add in a Deadline task
 Use `deadline TASK_NAME /by TASK_DATE [TASK_TIME]` to add in a task
 
  TASK_NAME: name of the task<br>
@@ -135,9 +136,9 @@ Use `deadline TASK_NAME /by TASK_DATE [TASK_TIME]` to add in a task
 #### 2.5.3 Adding an Event task: `event`
 This allows you to add in an Event task. An Event task consists of event description, date and time of the event..
 
- #### Usage
+#### Usage
  
- #### `event EVENT_NAME /at EVENT_DATE [EVENT_TIME]` - add in an Event task
+#### `event EVENT_NAME /at EVENT_DATE [EVENT_TIME]` - add in an Event task
 Use `event EVENT_NAME /at EVENT_DATE [EVENT_TIME]` to add in an Event task
 
  EVENT_NAME: name of the event<br>
@@ -155,9 +156,9 @@ Use `event EVENT_NAME /at EVENT_DATE [EVENT_TIME]` to add in an Event task
  
 ### 2.6 End the program: `bye`
 This will terminate the program.
- #### Usage
+#### Usage
  
- #### `bye` - end the program
+#### `bye` - end the program
  
  Use `bye` to terminate the program.
  
@@ -165,5 +166,3 @@ This will terminate the program.
  
  `BYE BYE SEE YOU SOON!`
  
- 
-## 3. Conclusion
