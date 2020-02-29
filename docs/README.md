@@ -47,7 +47,6 @@ After listing as shown above, mark the second item on the list as done and the f
 `Nice! I have marked this task as done:`<br>
  `[T][✓] math homework ` <br>
 
- 
 ### 2.3 Delete task from the list: `delete`
 This allows you to delete a task from the list.
 #### Usage
