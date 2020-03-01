@@ -6,13 +6,11 @@ import duke.TaskList.task.commands.Deadline;
 import duke.TaskList.task.commands.Event;
 import duke.TaskList.task.commands.ToDo;
 import duke.UI.UI;
-import duke.exceptions.InvalidListSizeException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -22,7 +20,7 @@ import java.util.Scanner;
  *
  * @author  Lim Yan Ting
  * @version 2.0
- * @since   2020-02-29
+ * @since   2020-03-01
  */
 
 public class Storage {
@@ -30,7 +28,7 @@ public class Storage {
     String pathToFile = "";
     String homePath = System.getProperty("user.dir");
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.pathToFile = filePath;
         this.doesFileExist = checkIfFileExists();
     }
@@ -46,7 +44,7 @@ public class Storage {
         File newFile = new File(filepath);
         try {
             newFile.createNewFile();
-        } catch (IOException e){
+        } catch (IOException e) {
             UI.getErrorMessage("fileCreation");
         }
         this.pathToFile = filepath;
@@ -73,7 +71,7 @@ public class Storage {
      * @throws FileNotFoundException  If file cannot be found.
      */
 
-    public TaskList loadFile() throws FileNotFoundException, DateTimeParseException {
+    public TaskList loadFile() throws FileNotFoundException {
 
         TaskList newTasks = new TaskList();
 
@@ -109,36 +107,41 @@ public class Storage {
      *
      * @param listToSave current list of tasks to save into file
      * @return Nothing
-     * @throws IOException if file canno be opened or written to.
+     * @catch IOException if file cannot be opened or written to.
      */
   
-    public void writeToFile(TaskList listToSave) throws IOException, InvalidListSizeException {
+    public void writeToFile(TaskList listToSave) {
 
-        if (!this.doesFileExist){
+        if (!this.doesFileExist) {
             createFile();
         }
-        FileWriter fw = new FileWriter(this.pathToFile);
-        String stringToWrite = "";
+        try {
+            FileWriter fw = new FileWriter(this.pathToFile);
+            String stringToWrite = "";
 
-        for (Task task : listToSave.totalTasks){
-            String status = "";
-            if (task.getTaskStatus() == "✓"){
-                status = "1";
-            } else {
-                status = "0";
+            for (Task task : listToSave.totalTasks) {
+                String status = "";
+                if (task.getTaskStatus() == "✓") {
+                    status = "1";
+                } else {
+                    status = "0";
+                }
+                switch (task.getTaskType()) {
+                case 'T':
+                    stringToWrite = task.getTaskType() + "," + status + "," + task.getTaskDescription() + "\n";
+                    break;
+                case 'E':
+                case 'D':
+                    stringToWrite = task.getTaskType() + "," + status + "," + task.getTaskDescription() + "," +
+                            task.getDateTimeStringForFile() + "\n";
+                    break;
+                }
+                fw.write(stringToWrite);
             }
-            switch (task.getTaskType()){
-            case 'T':
-                stringToWrite = task.getTaskType() + "," + status + "," + task.getTaskDescription() + "\n";
-                break;
-            case 'E':
-            case 'D':
-                stringToWrite = task.getTaskType() + "," + status + "," + task.getTaskDescription() + "," +
-                                    task.getDateTimeStringForFile() + "\n";
-                break;
-            }
-            fw.write(stringToWrite);
+            fw.close();
+        } catch (IOException e){
+            UI.getErrorMessage("fileIOModified");
         }
-        fw.close();
+
     }
 }

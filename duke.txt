@@ -1,3 +1,3 @@
-T,1,math homework 
-E,1,Colour's run ,2020-02-02
-D,0,CS3235 assignment ,2020-01-02
+E,0,helloWrold ,2020-12-12
+E,0,Colour ,2020-01-21
+T,0,homework

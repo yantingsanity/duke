@@ -5,11 +5,8 @@ import duke.Storage.Storage;
 import duke.TaskList.TaskList;
 import duke.UI.UI;
 import duke.exceptions.InvalidInputException;
-import duke.exceptions.InvalidListSizeException;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
 
 /**
  * <h1>Duke</h1>
@@ -18,7 +15,7 @@ import java.time.format.DateTimeParseException;
  *
  * @author  Lim Yan Ting
  * @version 2.0
- * @since   2020-02-24
+ * @since   2020-03-01
  */
 
 public class Duke {
@@ -40,7 +37,7 @@ public class Duke {
         storage = new Storage("\\duke.txt");
         try {
             totalTasks = storage.loadFile();
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             ui.getErrorMessage("fileIO");
             totalTasks = new TaskList();
         }
@@ -55,22 +52,16 @@ public class Duke {
     public static void run() {
         boolean isBye = false;
         newParser = new Parser(totalTasks);
-        while (!isBye){
+        while (!isBye) {
             String userInput = ui.getUserInput();
             newParser.readUserInput(userInput);
             try {
                 newParser.executeCommand();
                 isBye = newParser.isBye();
-            } catch (InvalidInputException e){
+            } catch (InvalidInputException e) {
                 ui.getErrorMessage("invalidInput");
-            } catch (InvalidListSizeException e){
-                ui.getErrorMessage("zeroTasks");
-            } catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 ui.getErrorMessage("indexOutOfBounds");
-            } catch (IOException e){
-                ui.getErrorMessage("fileIOModified");
-            } catch (DateTimeParseException e){
-                ui.getErrorMessage("dateTime");
             }
             System.out.println("____________________________________________________________________");
         }

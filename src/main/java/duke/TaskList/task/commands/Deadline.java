@@ -1,6 +1,7 @@
 package duke.TaskList.task.commands;
 
 import duke.TaskList.task.Task;
+import duke.UI.UI;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ import java.time.format.DateTimeParseException;
  *
  * @author  Lim Yan Ting
  * @version 2.0
- * @since   2020-02-29
+ * @since   2020-03-01
  */
 
 public class Deadline extends Task {
@@ -37,16 +38,20 @@ public class Deadline extends Task {
      *
      * @param date the date and time in String
      * @return Nothing
-     * @throws DateTimeParseException if the date and time are not in the correct format
+     * @catch DateTimeParseException if the date and time are not in the correct format
      */
 
-    public void getDateTime(String date) throws DateTimeParseException {
-        String[] dateTimeSplit = date.split(" ");
-        if (dateTimeSplit.length > 1) {
-            date = dateTimeSplit[0] + "T" + dateTimeSplit[1];
-            deadlineDateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME);
-        } else {
-            deadlineDateOnly = LocalDate.parse(date);
+    public void getDateTime(String date) {
+        try {
+            String[] dateTimeSplit = date.split(" ");
+            if (dateTimeSplit.length > 1) {
+                date = dateTimeSplit[0] + "T" + dateTimeSplit[1];
+                deadlineDateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME);
+            } else {
+                deadlineDateOnly = LocalDate.parse(date);
+            }
+        } catch (DateTimeParseException e) {
+            UI.getErrorMessage("dateTime");
         }
     }
 

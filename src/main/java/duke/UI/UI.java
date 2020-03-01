@@ -87,7 +87,7 @@ public class UI {
      */
 
     public static void getErrorMessage(String type) {
-        switch (type){
+        switch (type) {
         case "fileIO":
             System.out.println("File cannot be found! Created a new file instead.");
             break;
@@ -98,6 +98,10 @@ public class UI {
         case "zeroTasks":
             System.out.println("There is currently no tasks in the list!");
             break;
+        case "missingParam":
+            System.out.println("There is a missing parameter in your input!");
+            getHelpMessage();
+            break;
         case "indexOutOfBounds":
             System.out.println("Please choose a correct index/key in a word for us to search!");
             break;
@@ -106,8 +110,16 @@ public class UI {
             break;
         case "fileIOModified":
             System.out.println("Error with the file!");
+            break;
         case "dateTime":
             System.out.println("Please key in the date in the correct format of yyyy-mm-dd hh:mm, thank you!");
+            break;
+        case "deleteIndex":
+            System.out.println("Please provide an appropriate index to delete!");
+            break;
+        case "updateIndex":
+            System.out.println("Please provide an appropriate index to update!");
+            break;
         default:
             getHelpMessage();
         }

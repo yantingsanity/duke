@@ -1,7 +1,7 @@
 package duke.TaskList;
 
 import duke.TaskList.task.Task;
-import duke.exceptions.InvalidListSizeException;
+import duke.UI.UI;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author  Lim Yan Ting
  * @version 2.0
- * @since   2020-02-24
+ * @since   2020-03-01
  */
 
 public class TaskList {
@@ -33,19 +33,19 @@ public class TaskList {
      * Prints out all the tasks in the current list
      *
      * @return Nothing
-     * @throws InvalidListSizeException  If totalTasks.size() = 0.
-     * @throws NullPointerException If there is no instance of totalTasks
      */
 
-    public void printTaskList() throws InvalidListSizeException, NullPointerException {
-        if (totalTasks.size() > 0){
-            System.out.println("Here are the tasks in your list:");
-            int index = 0;
-            for (Task task : totalTasks){
-                System.out.println((++index) + ". " + task);
+    public void printTaskList() {
+        try {
+            if (totalTasks.size() > 0) {
+                System.out.println("Here are the tasks in your list:");
+                int index = 0;
+                for (Task task : totalTasks){
+                    System.out.println((++index) + ". " + task);
+                }
             }
-        } else {
-            throw new InvalidListSizeException();
+        } catch (NullPointerException e) {
+            UI.getErrorMessage("zeroTasks");
         }
     }
 
@@ -71,7 +71,7 @@ public class TaskList {
      * @return Nothing
      */
 
-    public void printTotalSize(){
+    public void printTotalSize() {
         System.out.println("Now you have " + totalTasks.size() + " tasks in the list.");
     }
 
@@ -83,17 +83,12 @@ public class TaskList {
      */
 
     public int getTaskID(String userCommand) {
-        int index = 0;
-        try {
-            String [] inputStrings = userCommand.split(" ");
-            if (inputStrings.length > 1){
-                index = Integer.parseInt(inputStrings[1].trim()) - 1;
-            }
+        String [] inputStrings = userCommand.split(" ");
+        if (inputStrings.length > 1) {
+            int index = Integer.parseInt(inputStrings[1].trim()) - 1;
             return index;
-        } catch (IndexOutOfBoundsException e){
-            System.out.println("Please provide an appropriate index to update/delete!");
-            return -1;
         }
+        return -1;
     }
 
     /**
@@ -101,15 +96,16 @@ public class TaskList {
      *
      * @param userCommand the command that the user has inputted
      * @return Nothing
-     * @throws IndexOutOfBoundsException if the index that the user specified is not in the current list
      */
 
-    public void setTaskDone(String userCommand) throws IndexOutOfBoundsException {
+    public void setTaskDone(String userCommand) {
         int taskNum = getTaskID(userCommand);
-        if (taskNum != -1){
+        try {
             Task task = totalTasks.get(taskNum);
             task.setTaskAsDone();
             System.out.println("Nice! I have marked this task as done: \n" + task);
+        } catch (IndexOutOfBoundsException e) {
+            UI.getErrorMessage("updateIndex");
         }
     }
 
@@ -118,17 +114,18 @@ public class TaskList {
      *
      * @param userCommand the command that the user has inputted
      * @return Nothing
-     * @throws IndexOutOfBoundsException if the index that the user specified is not in the current list
      */
 
-    public void deleteTask(String userCommand) throws IndexOutOfBoundsException {
+    public void deleteTask(String userCommand) {
         int taskNum = getTaskID(userCommand);
-        if (taskNum != -1){
+        try {
             Task task = totalTasks.get(taskNum);
             task.setTaskAsDone();
             System.out.println(task + " has been deleted!");
             totalTasks.remove(taskNum);
             printTotalSize();
+        } catch (IndexOutOfBoundsException e) {
+            UI.getErrorMessage("deleteIndex");
         }
     }
 
@@ -141,12 +138,12 @@ public class TaskList {
 
     public void findTasks(String findString) {
         int index = 0;
-        for (Task newTask : totalTasks){
-            if (newTask.getTaskDescription().contains(findString)){
+        for (Task newTask : totalTasks) {
+            if (newTask.getTaskDescription().contains(findString)) {
                 System.out.println((++index) + ". " + newTask);
             }
         }
-        if (index == 0){
+        if (index == 0) {
             System.out.println("There are no tasks with that keyword! :(");
         }
     }
