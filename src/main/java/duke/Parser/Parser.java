@@ -8,6 +8,9 @@ import duke.TaskList.task.commands.ToDo;
 import duke.UI.UI;
 import duke.exceptions.InvalidInputException;
 
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+
 import static duke.Duke.storage;
 
 /**
@@ -129,6 +132,8 @@ public class Parser {
             totalTasks.printTotalSize();
         } catch (IndexOutOfBoundsException e) {
             UI.getErrorMessage("missingParam");
+        } catch (DateTimeParseException e){
+            UI.getErrorMessage("dateTime");
         }
     }
 

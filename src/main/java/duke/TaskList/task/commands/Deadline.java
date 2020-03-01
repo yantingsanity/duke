@@ -38,21 +38,19 @@ public class Deadline extends Task {
      *
      * @param date the date and time in String
      * @return Nothing
-     * @catch DateTimeParseException if the date and time are not in the correct format
+     * @throws DateTimeParseException if the date and time are not in the correct format
      */
 
-    public void getDateTime(String date) {
-        try {
-            String[] dateTimeSplit = date.split(" ");
-            if (dateTimeSplit.length > 1) {
-                date = dateTimeSplit[0] + "T" + dateTimeSplit[1];
-                deadlineDateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME);
-            } else {
-                deadlineDateOnly = LocalDate.parse(date);
-            }
-        } catch (DateTimeParseException e) {
-            UI.getErrorMessage("dateTime");
+    public void getDateTime(String date) throws DateTimeParseException{
+
+        String[] dateTimeSplit = date.split(" ");
+        if (dateTimeSplit.length > 1) {
+            date = dateTimeSplit[0] + "T" + dateTimeSplit[1];
+            deadlineDateTime = LocalDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME);
+        } else {
+            deadlineDateOnly = LocalDate.parse(date);
         }
+
     }
 
     /**
