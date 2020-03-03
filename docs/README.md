@@ -129,7 +129,7 @@ This allows you to add in a Deadline task. A Deadline task consists of task desc
 #### 2.5.3 Adding an Event task: `event`
 This allows you to add in an Event task. An Event task consists of event description, date and time of the event..
 
-#### Usage
+#### Usage:
  
 Use `event EVENT_NAME /at EVENT_DATE [EVENT_TIME]` to add in an Event task
 
@@ -148,7 +148,7 @@ Use `event EVENT_NAME /at EVENT_DATE [EVENT_TIME]` to add in an Event task
  
 ### 2.6 End the program: `bye`
 This will terminate the program.
-#### Usage
+#### Usage:
  
  Use `bye` to terminate the program.
  
