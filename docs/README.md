@@ -7,9 +7,8 @@ Ting's duke is an application for those who <b>prefer to use a desktop app for m
 ### 2.1 Listing the tasks: `list`
 This lists out the current tasks that you have inserted into the application.
 
-#### Usage
-
-#### `list` - lists out the tasks
+#### Usage: 
+`list` - lists out the tasks
 
 Example of usage: 
 
@@ -25,9 +24,8 @@ Expected outcome:
 ### 2.2 Marking a task as done: `done`
 This allows you to mark a task as completed once you have finished it.
 
-#### Usage
-
-#### `done` - mark a task as done
+#### Usage: 
+`done` - mark a task as done
 
 Use `list` to view the list of the tasks and choose the number for the task that you have completed by doing this `done <INDEX>`.
 
@@ -49,9 +47,10 @@ After listing as shown above, mark the second item on the list as done and the f
 
 ### 2.3 Delete task from the list: `delete`
 This allows you to delete a task from the list.
-#### Usage
- 
-#### `delete` - delete the specified task
+
+#### Usage: 
+
+ `delete` - delete the specified task
  
  Use `list` to view the list of the tasks and choose the number for the task that you want to delete by doing this `delete <INDEX>`.
  
@@ -74,12 +73,11 @@ After listing as shown above, first item will be deleted and the following will 
   
 ### 2.4 Finding a task: `find`
 This allows you to find a specific task from the list.
-#### Usage
- 
-#### `find` - finding a specific task from the list
- 
-Use `find` to find the task.
 
+#### Usage: 
+
+`find` - finding a specific task from the list
+ 
  Example of usage: 
  
  `find essay`
@@ -94,12 +92,10 @@ In this Ting's duke, you will be able add three different type of tasks into the
 #### 2.5.1 Adding a ToDo task: `todo`
 This allows you to add in a ToDo task. A ToDo task only consists of task description.
 
-#### Usage
- 
-#### `todo TASK_NAME` - add in a ToDo task
- 
-Use `todo TASK_NAME` to add in a task
+#### Usage: 
 
+`todo TASK_NAME` - add in a ToDo task
+ 
  Example of usage: 
  
  `todo math homework`
@@ -113,10 +109,8 @@ Use `todo TASK_NAME` to add in a task
 #### 2.5.2 Adding a Deadline task: `deadline`
 This allows you to add in a Deadline task. A Deadline task consists of task description, date and time that the task need to be submitted.
 
-#### Usage
- 
-#### `deadline TASK_NAME /by TASK_DATE [TASK_TIME]` - add in a Deadline task
-Use `deadline TASK_NAME /by TASK_DATE [TASK_TIME]` to add in a task
+#### Usage: 
+`deadline TASK_NAME /by TASK_DATE [TASK_TIME]` - add in a Deadline task
 
  TASK_NAME: name of the task<br>
  TASK_DATE: date by which the task needs to be submitted in this format of `yyyy-mm-dd` <br>
@@ -137,7 +131,6 @@ This allows you to add in an Event task. An Event task consists of event descrip
 
 #### Usage
  
-#### `event EVENT_NAME /at EVENT_DATE [EVENT_TIME]` - add in an Event task
 Use `event EVENT_NAME /at EVENT_DATE [EVENT_TIME]` to add in an Event task
 
  EVENT_NAME: name of the event<br>
@@ -156,8 +149,6 @@ Use `event EVENT_NAME /at EVENT_DATE [EVENT_TIME]` to add in an Event task
 ### 2.6 End the program: `bye`
 This will terminate the program.
 #### Usage
- 
-#### `bye` - end the program
  
  Use `bye` to terminate the program.
  
